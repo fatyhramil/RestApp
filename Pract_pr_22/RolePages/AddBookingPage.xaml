@@ -1,0 +1,51 @@
+﻿<Page x:Class="Pract_pr_22.RolePages.AddBookingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Pract_pr_22.RolePages"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="800"
+      Title="AddBookingPage" Background="#4BB9F8">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+            <Button FontSize="30" x:Name="BackBtn" Click="BackBtn_Click" BorderBrush="#4BB9F8" Foreground="White" Background="#4BB9F8" Content="&lt;" Style="{StaticResource MaterialDesignOutlinedButton}" ToolTip="MaterialDesignOutlinedButton" Width="50" Height="50" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
+            <TextBlock Margin="0,5,0,0" HorizontalAlignment="Center" Text="К списку" FontSize="30"  Foreground="White"/>
+        </StackPanel>
+
+        <Button Margin="0,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" BorderBrush="#4BB9F8" Background="White" Foreground="#4BB9F8" x:Name="MyAccBtn" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Cursor="Hand"/>
+
+        <StackPanel Grid.Row="0" Grid.RowSpan="3" Orientation="Vertical" Grid.Column="1" Margin="0,0,100,0">
+            <TextBlock Margin="10" Foreground="White" FontSize="30" Text="Бронирование" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" Margin="10" Foreground="White" FontSize="25" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Address}" HorizontalAlignment="Center" Margin="10" Foreground="White" FontSize="25" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Margin="10" Foreground="White" FontSize="25" Text="в" VerticalAlignment="Center"/>
+                <TextBox materialDesign:HintAssist.Hint="Укажите время..." BorderBrush="White" Margin="10" Foreground="White" materialDesign:HintAssist.Foreground="Gray" x:Name="TimeTb" Width="130" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" Cursor="Arrow"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Margin="10" Foreground="White" FontSize="25" Text="на" VerticalAlignment="Center"/>
+                <TextBox materialDesign:HintAssist.Hint="0" BorderBrush="White" Margin="10" Foreground="White" materialDesign:HintAssist.Foreground="Gray" x:Name="CountTb" Width="50" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" Cursor="Arrow"/>
+                <TextBlock Margin="10" Foreground="White" FontSize="25" Text="персон" VerticalAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Button x:Name="AcceptBtn" Click="AcceptBtn_Click" Foreground="#4BB9F8" Background="White" BorderBrush="White" Margin="0,0,100,0" Content="Продолжить" Grid.Column="1" Grid.Row="4" Width="300" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label x:Name="DoneLbl" Content="{materialDesign:PackIcon Kind=Check, Size=100}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,100,0" Foreground="White" Visibility="Hidden"/>
+    </Grid>
+</Page>

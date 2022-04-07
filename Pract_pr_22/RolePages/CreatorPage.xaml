@@ -1,0 +1,73 @@
+﻿<Page x:Class="Pract_pr_22.RolePages.CreatorPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Pract_pr_22.RolePages"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="800"
+      Title="CreatorPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button materialDesign:ShadowAssist.ShadowEdges="None"  x:Name="ExitBtn" Click="ExitBtn_Click" Margin="0,20,20,0" BorderBrush="#FF0000" Foreground="#FF0000" Width="120" Style="{StaticResource MaterialDesignPaperLightButton}" ToolTip="Resource name: MaterialDesignPaperLightButton" Content="ВЫЙТИ" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand" />
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock Margin="10,0,0,0" FontWeight="Bold" x:Name="WelcomTb" HorizontalAlignment="Center" Text="Здравствуйте, " FontSize="40"  Foreground="Black"/>
+                <TextBlock Margin="10,0,0,0" Text="Управление ресторанами" FontSize="20" Foreground="Gray"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Button Grid.Row="0" materialDesign:ShadowAssist.ShadowEdges="None" HorizontalAlignment="Right" x:Name="AddBtn" Click="AddBtn_Click" Margin="0,100,20,0" BorderBrush="#4BB9F8" Foreground="#4BB9F8" Width="120" Style="{StaticResource MaterialDesignPaperLightButton}" ToolTip="Resource name: MaterialDesignPaperLightButton" Content="ДОБАВИТЬ" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand" />
+
+        <StackPanel Grid.Row="1">
+            <DataGrid VerticalScrollBarVisibility="Visible" IsReadOnly="True" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeColumns="False" x:Name="MyRestGrid" CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="All">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="250">
+                        <DataGridTemplateColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="НАЗВАНИЕ РЕСТОРАНА" Foreground="Black"/>
+                            </StackPanel>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Restourant.Name}" Foreground="Black"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Binding="{Binding Restourant.Address}" Width="200" Foreground="Black" ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
+                        <DataGridTextColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="АДРЕС" Foreground="Black"/>
+                            </StackPanel>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Width="300">
+                        <DataGridTemplateColumn.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="УПРАВЛЕНИЕ" Foreground="Black"/>
+                            </StackPanel>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="EditBtn" Click="EditBtn_Click" materialDesign:ShadowAssist.ShadowEdges="None" Background="White" Foreground="#4BB9F8" Width="150" BorderBrush="#4BB9F8" Style="{StaticResource MaterialDesignPaperLightButton}" ToolTip="Resource name: MaterialDesignPaperLightButton" Content="РЕДАКТИРОВАТЬ" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                                    <Button x:Name="DeleteBtn" Click="DeleteBtn_Click" materialDesign:ShadowAssist.ShadowEdges="None" Background="White" Foreground="#FF0000" Margin="10,0,0,0" Width="100" BorderBrush="#FF0000" Style="{StaticResource MaterialDesignPaperLightButton}" ToolTip="Resource name: MaterialDesignPaperLightButton" Content="УДАЛИТЬ" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Page>

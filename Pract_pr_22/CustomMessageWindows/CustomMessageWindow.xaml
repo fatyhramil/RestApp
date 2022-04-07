@@ -1,0 +1,22 @@
+﻿<Window x:Class="Pract_pr_22.CustomMessageWindows.CustomMessageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Pract_pr_22.CustomMessageWindows"
+        mc:Ignorable="d"
+        Title="CustomMessageWindow" Height="100" Width="300" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+    <Border CornerRadius="5" Background="White">
+
+        <StackPanel>
+            <StackPanel Height="60">
+                <TextBlock Margin="10" Name="txtMessage" Text="An Error Occured in the Application" Foreground="Black" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button materialDesign:ShadowAssist.ShadowDepth="Depth0" materialDesign:ShadowAssist.ShadowEdges="None" Name="BackBtn" Height="30"  HorizontalAlignment="Center" Width="80"  Click="BackBtn_Click"  Background="White" BorderBrush="White" Foreground="DimGray"/>
+                <Button materialDesign:ShadowAssist.ShadowDepth="Depth0" materialDesign:ShadowAssist.ShadowEdges="None" Name="AcceptBtn" HorizontalAlignment="Center" Background="White" BorderBrush="White" Width="120"  Click="BntOk_Click" Foreground="#4BB9F8" Height="30" Cursor="Hand"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>

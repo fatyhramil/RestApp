@@ -1,0 +1,54 @@
+﻿<Page x:Class="Pract_pr_22.RegPages.RegPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Pract_pr_22.RegPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="800"
+      Title="RegPage">
+
+    <StackPanel Orientation="Horizontal">
+        <StackPanel Width="500" VerticalAlignment="Center">
+            <StackPanel>
+                <TextBlock Margin="10,0,0,0" TextWrapping="WrapWithOverflow" Width="280" FontSize="30" FontWeight="Bold" HorizontalAlignment="Left">
+                Заполните данные о себе
+                </TextBlock>
+            </StackPanel>
+            <StackPanel>
+                <Label x:Name="NeedForLbl" Margin="10,0,0,0" Content="Это необходимо для " Foreground="Gray"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left">
+                <TextBox BorderBrush="Gray" x:Name="PhoneTb" Foreground="Black" Margin="10" Width="350" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" materialDesign:HintAssist.Hint="Номер телефона" materialDesign:HintAssist.Foreground="Gray" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" Cursor="Arrow" >
+                    <TextBox.ToolTip>
+                        <StackPanel>
+                            <Label Content="Пример:"/>
+                            <Label Content="+79123456789"/>
+                        </StackPanel>
+                    </TextBox.ToolTip>
+                </TextBox>
+                <TextBox BorderBrush="Gray" x:Name="NameTb" Foreground="Black" Margin="10" Width="350" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" materialDesign:HintAssist.Hint="Имя" materialDesign:HintAssist.Foreground="Gray" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" Cursor="Arrow" />
+                <TextBox BorderBrush="Gray" x:Name="PasswordTb" Foreground="Black" Margin="10" Width="350" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" materialDesign:HintAssist.Hint="Пароль" materialDesign:HintAssist.Foreground="Gray" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" Cursor="Arrow" />
+                <CheckBox Background="#4BB9F8" Margin="10" x:Name="CreatePassCb" Content="Сгенерировать пароль" Checked="CreatePassCb_Checked">
+                    <CheckBox.Resources>
+                        <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#4BB9F8"/>
+                    </CheckBox.Resources>
+                </CheckBox>
+                <CheckBox Background="#4BB9F8" Margin="10" x:Name="IsAgreeCb">
+                    <CheckBox.Resources>
+                        <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#4BB9F8"/>
+                    </CheckBox.Resources>
+                    <TextBlock>Согласен с условиями пользования <Hyperlink>условиями пользования</Hyperlink> </TextBlock>
+                </CheckBox>
+            </StackPanel>
+            <StackPanel>
+                <Button materialDesign:ShadowAssist.ShadowEdges="Bottom" x:Name="Enterbtn" BorderBrush="#4BB9F8" Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="200" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="ОТПРАВИТЬ" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Background="#4BB9F8" Click="Enterbtn_Click" Cursor="Hand"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+            <Label Foreground="#4BB9F8" Content="&lt;" FontSize="60" FontWeight="Bold" Margin="0,0,0,10"/>
+            <Label Foreground="#4BB9F8" Content="Регистрация" FontSize="30" FontWeight="Bold" VerticalAlignment="Center"/>
+        </StackPanel>
+    </StackPanel>
+</Page>
