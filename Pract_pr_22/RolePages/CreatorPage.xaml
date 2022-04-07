@@ -39,12 +39,12 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Restourant.Name}" Foreground="Black"/>
+                                    <TextBlock Text="{Binding Restaurant.Name}" Foreground="Black"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Binding="{Binding Restourant.Address}" Width="200" Foreground="Black" ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
+                    <DataGridTextColumn Binding="{Binding Restaurant.Address}" Width="200" Foreground="Black" ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
                         <DataGridTextColumn.Header>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="АДРЕС" Foreground="Black"/>

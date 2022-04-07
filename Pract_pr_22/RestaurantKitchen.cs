@@ -12,18 +12,13 @@ namespace Pract_pr_22
     using System;
     using System.Collections.Generic;
     
-    public partial class KitchenType
+    public partial class RestaurantKitchen
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public KitchenType()
-        {
-            this.RestaurantKitchen = new HashSet<RestaurantKitchen>();
-        }
-    
         public int ID { get; set; }
-        public string Name { get; set; }
+        public Nullable<int> RestaurantID { get; set; }
+        public Nullable<int> KitchenID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RestaurantKitchen> RestaurantKitchen { get; set; }
+        public virtual KitchenType KitchenType { get; set; }
+        public virtual Restaurant Restaurant { get; set; }
     }
 }

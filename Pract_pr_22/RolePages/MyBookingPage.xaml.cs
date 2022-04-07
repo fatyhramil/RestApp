@@ -32,7 +32,7 @@ namespace Pract_pr_22.RolePages
 
             MyAccBtn.Content = user.Name.Substring(0, 2).ToUpper();
 
-            MyBookingList.ItemsSource = MainWindow.ent.Booking.Where(c => c.IDUser == localUser.ID).ToList();
+            MyBookingList.ItemsSource = MainWindow.ent.Booking.Where(c => c.UserID == localUser.ID).ToList();
         }
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)
@@ -45,7 +45,7 @@ namespace Pract_pr_22.RolePages
             Button button = sender as Button;
             Booking booking = button.DataContext as Booking;
 
-            MessageBox.Show($"Контактный номер\n{booking.Restourant.ContactPhone}");
+            MessageBox.Show($"Контактный номер\n{booking.Restaurant.Phone}");
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
@@ -66,7 +66,7 @@ namespace Pract_pr_22.RolePages
                 MainWindow.ent.Booking.Remove(booking);
                 MainWindow.ent.SaveChanges();
 
-                MyBookingList.ItemsSource = MainWindow.ent.Booking.Where(c => c.IDUser == localUser.ID).ToList();
+                MyBookingList.ItemsSource = MainWindow.ent.Booking.Where(c => c.UserID == localUser.ID).ToList();
             }
         }
     }

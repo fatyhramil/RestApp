@@ -32,7 +32,7 @@ namespace Pract_pr_22.RolePages
 
             WelcomTb.Text += localUser.Name;
 
-            MyRestGrid.ItemsSource = MainWindow.ent.Ownership.Where(c => c.IDUser == localUser.ID).ToList();
+            MyRestGrid.ItemsSource = MainWindow.ent.Ownership.Where(c => c.UserID == localUser.ID).ToList();
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
@@ -44,12 +44,13 @@ namespace Pract_pr_22.RolePages
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new AddEditRestPage(new Ownership()));
         }
 
         private void EditBtn_Click(object sender, RoutedEventArgs e)
         {
-            //NavigationService.Navigate(new AuthPage());
+            Ownership ownership = MyRestGrid.SelectedItem as Ownership;
+            NavigationService.Navigate(new AddEditRestPage(ownership));
         }
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
@@ -61,12 +62,12 @@ namespace Pract_pr_22.RolePages
                 Button button = sender as Button;
                 Ownership own = button.DataContext as Ownership;
 
-                if (MainWindow.ent.Booking.Where(c => c.IDRest == own.IDRest).ToList().Count == 0)
+                if (MainWindow.ent.Booking.Where(c => c.RestaurantID == own.RestaurantID).ToList().Count == 0)
                 {
                     MainWindow.ent.Ownership.Remove(own);
                     MainWindow.ent.SaveChanges();
 
-                    MyRestGrid.ItemsSource = MainWindow.ent.Ownership.Where(c => c.IDUser == localUser.ID).ToList();
+                    MyRestGrid.ItemsSource = MainWindow.ent.Ownership.Where(c => c.UserID == localUser.ID).ToList();
                 }
                 else
                 {

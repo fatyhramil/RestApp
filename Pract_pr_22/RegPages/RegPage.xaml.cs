@@ -30,7 +30,7 @@ namespace Pract_pr_22.RegPages
 
             localuser = user;
 
-            if (localuser.IDRole == 1)
+            if (localuser.RoleID == 1)
             {
                 NeedForLbl.Content += "управления ресторанами";
             }
@@ -56,7 +56,7 @@ namespace Pract_pr_22.RegPages
                 MainWindow.ent.User.Add(localuser);
                 MainWindow.ent.SaveChanges();
 
-                if (localuser.IDRole == 1)
+                if (localuser.RoleID == 1)
                 {
                     NavigationService.Navigate(new ClientPage(localuser));
                 }

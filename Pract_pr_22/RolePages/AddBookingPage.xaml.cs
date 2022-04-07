@@ -22,9 +22,9 @@ namespace Pract_pr_22.RolePages
     public partial class AddBookingPage : Page
     {
         private static User localUser;
-        private static Restourant localRest;
+        private static Restaurant localRest;
 
-        public AddBookingPage(User user, Restourant restourant)
+        public AddBookingPage(User user, Restaurant restourant)
         {
             InitializeComponent();
 
@@ -69,9 +69,9 @@ namespace Pract_pr_22.RolePages
 
                     Booking booking = new Booking
                     {
-                        IDUser = localUser.ID,
-                        IDRest = localRest.ID,
-                        CountPeople = count,
+                        UserID = localUser.ID,
+                        RestaurantID = localRest.ID,
+                        PeopleCount = count,
                         DateTime = bookingDate
                     };
 

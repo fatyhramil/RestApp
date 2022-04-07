@@ -33,11 +33,11 @@ namespace Pract_pr_22.RegPages
 
             if (radioButton.Name == "BookingRb")
             {
-                user.IDRole = 1;
+                user.RoleID = 1;
             }
             else
             {
-                user.IDRole = 2;
+                user.RoleID = 2;
             }
 
             NavigationService.Navigate(new RegPage(user));

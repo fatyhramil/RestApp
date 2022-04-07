@@ -39,7 +39,7 @@ namespace Pract_pr_22.RegPages
 
             if (user != null)
             {
-                if (user.IDRole == 1)
+                if (user.RoleID == 1)
                 {
                     NavigationService.Navigate(new ClientPage(user));
                 }

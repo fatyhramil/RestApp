@@ -4,15 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище RestaurantDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="RestDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Booking">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IDUser" Type="int" />
-          <Property Name="IDRest" Type="int" />
-          <Property Name="CountPeople" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="RestaurantID" Type="int" />
+          <Property Name="PeopleCount" Type="int" />
           <Property Name="DateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="KitchenType">
@@ -20,48 +20,48 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="30" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Ownership">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IDUser" Type="int" />
-          <Property Name="IDRest" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="RestaurantID" Type="int" />
         </EntityType>
-        <EntityType Name="Restourant">
+        <EntityType Name="Restaurant">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="30" />
-          <Property Name="Description" Type="varchar(max)" />
-          <Property Name="Address" Type="varchar" MaxLength="80" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
           <Property Name="PlaceCount" Type="int" />
-          <Property Name="Image" Type="varchar(max)" />
-          <Property Name="ContactPhone" Type="varchar" MaxLength="15" />
-          <Property Name="HaveTeracce" Type="bit" />
+          <Property Name="Image" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="HasTerrace" Type="bit" />
           <Property Name="StartTime" Type="time" Precision="7" />
           <Property Name="EndTime" Type="time" Precision="7" />
-          <Property Name="HotWords" Type="varchar(max)" />
-          <Property Name="AVGPrice" Type="money" />
-          <Property Name="Rating" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Hotwords" Type="nvarchar" MaxLength="150" />
+          <Property Name="AveragePrice" Type="float" />
+          <Property Name="Rating" Type="float" />
         </EntityType>
-        <EntityType Name="Restournat_Kitchen">
+        <EntityType Name="RestaurantKitchen">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IDRest" Type="int" />
-          <Property Name="IDKitchen" Type="int" />
+          <Property Name="RestaurantID" Type="int" />
+          <Property Name="KitchenID" Type="int" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="25" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -78,20 +78,20 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Phone" Type="varchar" MaxLength="15" />
-          <Property Name="Password" Type="varchar" MaxLength="25" />
-          <Property Name="IDRole" Type="int" />
-          <Property Name="Name" Type="varchar" MaxLength="35" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoleID" Type="int" />
         </EntityType>
-        <Association Name="FK_Booking_Restourant">
-          <End Role="Restourant" Type="Self.Restourant" Multiplicity="0..1" />
+        <Association Name="FK_Booking_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="0..1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Restourant">
+            <Principal Role="Restaurant">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Booking">
-              <PropertyRef Name="IDRest" />
+              <PropertyRef Name="RestaurantID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -103,19 +103,19 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Booking">
-              <PropertyRef Name="IDUser" />
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Ownership_Restourant">
-          <End Role="Restourant" Type="Self.Restourant" Multiplicity="0..1" />
+        <Association Name="FK_Ownership_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="0..1" />
           <End Role="Ownership" Type="Self.Ownership" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Restourant">
+            <Principal Role="Restaurant">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Ownership">
-              <PropertyRef Name="IDRest" />
+              <PropertyRef Name="RestaurantID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -127,31 +127,31 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Ownership">
-              <PropertyRef Name="IDUser" />
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Restournat_Kitchen_KitchenType">
+        <Association Name="FK_RestaurantKitchen_KitchenType">
           <End Role="KitchenType" Type="Self.KitchenType" Multiplicity="0..1" />
-          <End Role="Restournat_Kitchen" Type="Self.Restournat_Kitchen" Multiplicity="*" />
+          <End Role="RestaurantKitchen" Type="Self.RestaurantKitchen" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="KitchenType">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Restournat_Kitchen">
-              <PropertyRef Name="IDKitchen" />
+            <Dependent Role="RestaurantKitchen">
+              <PropertyRef Name="KitchenID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Restournat_Kitchen_Restourant">
-          <End Role="Restourant" Type="Self.Restourant" Multiplicity="0..1" />
-          <End Role="Restournat_Kitchen" Type="Self.Restournat_Kitchen" Multiplicity="*" />
+        <Association Name="FK_RestaurantKitchen_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="0..1" />
+          <End Role="RestaurantKitchen" Type="Self.RestaurantKitchen" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Restourant">
+            <Principal Role="Restaurant">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Restournat_Kitchen">
-              <PropertyRef Name="IDRest" />
+            <Dependent Role="RestaurantKitchen">
+              <PropertyRef Name="RestaurantID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -163,42 +163,42 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="User">
-              <PropertyRef Name="IDRole" />
+              <PropertyRef Name="RoleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище RestaurantDBModelContainer">
+        <EntityContainer Name="RestDatabaseModelStoreContainer">
           <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KitchenType" EntityType="Self.KitchenType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ownership" EntityType="Self.Ownership" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Restourant" EntityType="Self.Restourant" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Restournat_Kitchen" EntityType="Self.Restournat_Kitchen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RestaurantKitchen" EntityType="Self.RestaurantKitchen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Booking_Restourant" Association="Self.FK_Booking_Restourant">
-            <End Role="Restourant" EntitySet="Restourant" />
+          <AssociationSet Name="FK_Booking_Restaurant" Association="Self.FK_Booking_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
             <End Role="Booking" EntitySet="Booking" />
           </AssociationSet>
           <AssociationSet Name="FK_Booking_User" Association="Self.FK_Booking_User">
             <End Role="User" EntitySet="User" />
             <End Role="Booking" EntitySet="Booking" />
           </AssociationSet>
-          <AssociationSet Name="FK_Ownership_Restourant" Association="Self.FK_Ownership_Restourant">
-            <End Role="Restourant" EntitySet="Restourant" />
+          <AssociationSet Name="FK_Ownership_Restaurant" Association="Self.FK_Ownership_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
             <End Role="Ownership" EntitySet="Ownership" />
           </AssociationSet>
           <AssociationSet Name="FK_Ownership_User" Association="Self.FK_Ownership_User">
             <End Role="User" EntitySet="User" />
             <End Role="Ownership" EntitySet="Ownership" />
           </AssociationSet>
-          <AssociationSet Name="FK_Restournat_Kitchen_KitchenType" Association="Self.FK_Restournat_Kitchen_KitchenType">
+          <AssociationSet Name="FK_RestaurantKitchen_KitchenType" Association="Self.FK_RestaurantKitchen_KitchenType">
             <End Role="KitchenType" EntitySet="KitchenType" />
-            <End Role="Restournat_Kitchen" EntitySet="Restournat_Kitchen" />
+            <End Role="RestaurantKitchen" EntitySet="RestaurantKitchen" />
           </AssociationSet>
-          <AssociationSet Name="FK_Restournat_Kitchen_Restourant" Association="Self.FK_Restournat_Kitchen_Restourant">
-            <End Role="Restourant" EntitySet="Restourant" />
-            <End Role="Restournat_Kitchen" EntitySet="Restournat_Kitchen" />
+          <AssociationSet Name="FK_RestaurantKitchen_Restaurant" Association="Self.FK_RestaurantKitchen_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="RestaurantKitchen" EntitySet="RestaurantKitchen" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
@@ -209,17 +209,17 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="RestaurantDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="RestDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Booking">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDUser" Type="Int32" />
-          <Property Name="IDRest" Type="Int32" />
-          <Property Name="CountPeople" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="RestaurantID" Type="Int32" />
+          <Property Name="PeopleCount" Type="Int32" />
           <Property Name="DateTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Restourant" Relationship="Self.FK_Booking_Restourant" FromRole="Booking" ToRole="Restourant" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK_Booking_Restaurant" FromRole="Booking" ToRole="Restaurant" />
           <NavigationProperty Name="User" Relationship="Self.FK_Booking_User" FromRole="Booking" ToRole="User" />
         </EntityType>
         <EntityType Name="KitchenType">
@@ -227,56 +227,56 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Restournat_Kitchen" Relationship="Self.FK_Restournat_Kitchen_KitchenType" FromRole="KitchenType" ToRole="Restournat_Kitchen" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RestaurantKitchen" Relationship="Self.FK_RestaurantKitchen_KitchenType" FromRole="KitchenType" ToRole="RestaurantKitchen" />
         </EntityType>
         <EntityType Name="Ownership">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDUser" Type="Int32" />
-          <Property Name="IDRest" Type="Int32" />
-          <NavigationProperty Name="Restourant" Relationship="Self.FK_Ownership_Restourant" FromRole="Ownership" ToRole="Restourant" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="RestaurantID" Type="Int32" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK_Ownership_Restaurant" FromRole="Ownership" ToRole="Restaurant" />
           <NavigationProperty Name="User" Relationship="Self.FK_Ownership_User" FromRole="Ownership" ToRole="User" />
         </EntityType>
-        <EntityType Name="Restourant">
+        <EntityType Name="Restaurant">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PlaceCount" Type="Int32" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ContactPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="HaveTeracce" Type="Boolean" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HasTerrace" Type="Boolean" />
           <Property Name="StartTime" Type="Time" Precision="7" />
           <Property Name="EndTime" Type="Time" Precision="7" />
-          <Property Name="HotWords" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="AVGPrice" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Rating" Type="Decimal" Precision="18" Scale="1" />
-          <NavigationProperty Name="Booking" Relationship="Self.FK_Booking_Restourant" FromRole="Restourant" ToRole="Booking" />
-          <NavigationProperty Name="Ownership" Relationship="Self.FK_Ownership_Restourant" FromRole="Restourant" ToRole="Ownership" />
-          <NavigationProperty Name="Restournat_Kitchen" Relationship="Self.FK_Restournat_Kitchen_Restourant" FromRole="Restourant" ToRole="Restournat_Kitchen" />
+          <Property Name="Hotwords" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AveragePrice" Type="Double" />
+          <Property Name="Rating" Type="Double" />
+          <NavigationProperty Name="Booking" Relationship="Self.FK_Booking_Restaurant" FromRole="Restaurant" ToRole="Booking" />
+          <NavigationProperty Name="Ownership" Relationship="Self.FK_Ownership_Restaurant" FromRole="Restaurant" ToRole="Ownership" />
+          <NavigationProperty Name="RestaurantKitchen" Relationship="Self.FK_RestaurantKitchen_Restaurant" FromRole="Restaurant" ToRole="RestaurantKitchen" />
         </EntityType>
-        <EntityType Name="Restournat_Kitchen">
+        <EntityType Name="RestaurantKitchen">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDRest" Type="Int32" />
-          <Property Name="IDKitchen" Type="Int32" />
-          <NavigationProperty Name="KitchenType" Relationship="Self.FK_Restournat_Kitchen_KitchenType" FromRole="Restournat_Kitchen" ToRole="KitchenType" />
-          <NavigationProperty Name="Restourant" Relationship="Self.FK_Restournat_Kitchen_Restourant" FromRole="Restournat_Kitchen" ToRole="Restourant" />
+          <Property Name="RestaurantID" Type="Int32" />
+          <Property Name="KitchenID" Type="Int32" />
+          <NavigationProperty Name="KitchenType" Relationship="Self.FK_RestaurantKitchen_KitchenType" FromRole="RestaurantKitchen" ToRole="KitchenType" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK_RestaurantKitchen_Restaurant" FromRole="RestaurantKitchen" ToRole="Restaurant" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -294,23 +294,23 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="IDRole" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="Int32" />
           <NavigationProperty Name="Booking" Relationship="Self.FK_Booking_User" FromRole="User" ToRole="Booking" />
           <NavigationProperty Name="Ownership" Relationship="Self.FK_Ownership_User" FromRole="User" ToRole="Ownership" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
         </EntityType>
-        <Association Name="FK_Booking_Restourant">
-          <End Role="Restourant" Type="Self.Restourant" Multiplicity="0..1" />
+        <Association Name="FK_Booking_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="0..1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Restourant">
+            <Principal Role="Restaurant">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Booking">
-              <PropertyRef Name="IDRest" />
+              <PropertyRef Name="RestaurantID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -322,31 +322,31 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Booking">
-              <PropertyRef Name="IDUser" />
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Restournat_Kitchen_KitchenType">
+        <Association Name="FK_RestaurantKitchen_KitchenType">
           <End Role="KitchenType" Type="Self.KitchenType" Multiplicity="0..1" />
-          <End Role="Restournat_Kitchen" Type="Self.Restournat_Kitchen" Multiplicity="*" />
+          <End Role="RestaurantKitchen" Type="Self.RestaurantKitchen" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="KitchenType">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Restournat_Kitchen">
-              <PropertyRef Name="IDKitchen" />
+            <Dependent Role="RestaurantKitchen">
+              <PropertyRef Name="KitchenID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Ownership_Restourant">
-          <End Role="Restourant" Type="Self.Restourant" Multiplicity="0..1" />
+        <Association Name="FK_Ownership_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="0..1" />
           <End Role="Ownership" Type="Self.Ownership" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Restourant">
+            <Principal Role="Restaurant">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Ownership">
-              <PropertyRef Name="IDRest" />
+              <PropertyRef Name="RestaurantID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -358,19 +358,19 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Ownership">
-              <PropertyRef Name="IDUser" />
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Restournat_Kitchen_Restourant">
-          <End Role="Restourant" Type="Self.Restourant" Multiplicity="0..1" />
-          <End Role="Restournat_Kitchen" Type="Self.Restournat_Kitchen" Multiplicity="*" />
+        <Association Name="FK_RestaurantKitchen_Restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="0..1" />
+          <End Role="RestaurantKitchen" Type="Self.RestaurantKitchen" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Restourant">
+            <Principal Role="Restaurant">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Restournat_Kitchen">
-              <PropertyRef Name="IDRest" />
+            <Dependent Role="RestaurantKitchen">
+              <PropertyRef Name="RestaurantID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -382,42 +382,42 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="User">
-              <PropertyRef Name="IDRole" />
+              <PropertyRef Name="RoleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="RestaurantDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="RestDatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Booking" EntityType="Self.Booking" />
           <EntitySet Name="KitchenType" EntityType="Self.KitchenType" />
           <EntitySet Name="Ownership" EntityType="Self.Ownership" />
-          <EntitySet Name="Restourant" EntityType="Self.Restourant" />
-          <EntitySet Name="Restournat_Kitchen" EntityType="Self.Restournat_Kitchen" />
+          <EntitySet Name="Restaurant" EntityType="Self.Restaurant" />
+          <EntitySet Name="RestaurantKitchen" EntityType="Self.RestaurantKitchen" />
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK_Booking_Restourant" Association="Self.FK_Booking_Restourant">
-            <End Role="Restourant" EntitySet="Restourant" />
+          <AssociationSet Name="FK_Booking_Restaurant" Association="Self.FK_Booking_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
             <End Role="Booking" EntitySet="Booking" />
           </AssociationSet>
           <AssociationSet Name="FK_Booking_User" Association="Self.FK_Booking_User">
             <End Role="User" EntitySet="User" />
             <End Role="Booking" EntitySet="Booking" />
           </AssociationSet>
-          <AssociationSet Name="FK_Restournat_Kitchen_KitchenType" Association="Self.FK_Restournat_Kitchen_KitchenType">
+          <AssociationSet Name="FK_RestaurantKitchen_KitchenType" Association="Self.FK_RestaurantKitchen_KitchenType">
             <End Role="KitchenType" EntitySet="KitchenType" />
-            <End Role="Restournat_Kitchen" EntitySet="Restournat_Kitchen" />
+            <End Role="RestaurantKitchen" EntitySet="RestaurantKitchen" />
           </AssociationSet>
-          <AssociationSet Name="FK_Ownership_Restourant" Association="Self.FK_Ownership_Restourant">
-            <End Role="Restourant" EntitySet="Restourant" />
+          <AssociationSet Name="FK_Ownership_Restaurant" Association="Self.FK_Ownership_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
             <End Role="Ownership" EntitySet="Ownership" />
           </AssociationSet>
           <AssociationSet Name="FK_Ownership_User" Association="Self.FK_Ownership_User">
             <End Role="User" EntitySet="User" />
             <End Role="Ownership" EntitySet="Ownership" />
           </AssociationSet>
-          <AssociationSet Name="FK_Restournat_Kitchen_Restourant" Association="Self.FK_Restournat_Kitchen_Restourant">
-            <End Role="Restourant" EntitySet="Restourant" />
-            <End Role="Restournat_Kitchen" EntitySet="Restournat_Kitchen" />
+          <AssociationSet Name="FK_RestaurantKitchen_Restaurant" Association="Self.FK_RestaurantKitchen_Restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="RestaurantKitchen" EntitySet="RestaurantKitchen" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
@@ -429,20 +429,20 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище RestaurantDBModelContainer" CdmEntityContainer="RestaurantDBEntities">
+        <EntityContainerMapping StorageEntityContainer="RestDatabaseModelStoreContainer" CdmEntityContainer="RestDatabaseEntities">
           <EntitySetMapping Name="Booking">
-            <EntityTypeMapping TypeName="RestaurantDBModel.Booking">
+            <EntityTypeMapping TypeName="RestDatabaseModel.Booking">
               <MappingFragment StoreEntitySet="Booking">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
-                <ScalarProperty Name="IDRest" ColumnName="IDRest" />
-                <ScalarProperty Name="CountPeople" ColumnName="CountPeople" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="PeopleCount" ColumnName="PeopleCount" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="KitchenType">
-            <EntityTypeMapping TypeName="RestaurantDBModel.KitchenType">
+            <EntityTypeMapping TypeName="RestDatabaseModel.KitchenType">
               <MappingFragment StoreEntitySet="KitchenType">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -450,44 +450,44 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ownership">
-            <EntityTypeMapping TypeName="RestaurantDBModel.Ownership">
+            <EntityTypeMapping TypeName="RestDatabaseModel.Ownership">
               <MappingFragment StoreEntitySet="Ownership">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
-                <ScalarProperty Name="IDRest" ColumnName="IDRest" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Restourant">
-            <EntityTypeMapping TypeName="RestaurantDBModel.Restourant">
-              <MappingFragment StoreEntitySet="Restourant">
+          <EntitySetMapping Name="Restaurant">
+            <EntityTypeMapping TypeName="RestDatabaseModel.Restaurant">
+              <MappingFragment StoreEntitySet="Restaurant">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="PlaceCount" ColumnName="PlaceCount" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
-                <ScalarProperty Name="HaveTeracce" ColumnName="HaveTeracce" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="HasTerrace" ColumnName="HasTerrace" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="HotWords" ColumnName="HotWords" />
-                <ScalarProperty Name="AVGPrice" ColumnName="AVGPrice" />
+                <ScalarProperty Name="Hotwords" ColumnName="Hotwords" />
+                <ScalarProperty Name="AveragePrice" ColumnName="AveragePrice" />
                 <ScalarProperty Name="Rating" ColumnName="Rating" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Restournat_Kitchen">
-            <EntityTypeMapping TypeName="RestaurantDBModel.Restournat_Kitchen">
-              <MappingFragment StoreEntitySet="Restournat_Kitchen">
+          <EntitySetMapping Name="RestaurantKitchen">
+            <EntityTypeMapping TypeName="RestDatabaseModel.RestaurantKitchen">
+              <MappingFragment StoreEntitySet="RestaurantKitchen">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IDRest" ColumnName="IDRest" />
-                <ScalarProperty Name="IDKitchen" ColumnName="IDKitchen" />
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="KitchenID" ColumnName="KitchenID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="RestaurantDBModel.Role">
+            <EntityTypeMapping TypeName="RestDatabaseModel.Role">
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -495,7 +495,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="RestaurantDBModel.sysdiagrams">
+            <EntityTypeMapping TypeName="RestDatabaseModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -506,13 +506,13 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="RestaurantDBModel.User">
+            <EntityTypeMapping TypeName="RestDatabaseModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="IDRole" ColumnName="IDRole" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -533,7 +533,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

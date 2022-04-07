@@ -20,9 +20,40 @@ namespace Pract_pr_22.RolePages
     /// </summary>
     public partial class AddEditRestPage : Page
     {
-        public AddEditRestPage()
+        Ownership localOwnership;
+        Restaurant restaurant;
+        public AddEditRestPage(Ownership ownership)
         {
             InitializeComponent();
+            localOwnership = ownership;
+
+            if (localOwnership != null)
+            {
+                restaurant = MainWindow.ent.Restaurant.Where(c => c.ID == localOwnership.RestaurantID).FirstOrDefault();
+            }
+            DataContext = restaurant;
+        }
+        private void RadioButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void YesRb_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NoRb_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddRestBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (NameTb.Text.Length > 0 && AboutTb.Text.Length > 0 && AddressTb.Text.Length > 0 && MestaTb.Text.Length > 0 && RestImages.Text.Length > 0)
+            {
+
+            }
         }
     }
 }

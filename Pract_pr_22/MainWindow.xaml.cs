@@ -21,7 +21,7 @@ namespace Pract_pr_22
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static RestaurantDBEntities ent = new RestaurantDBEntities();
+        public static RestDatabaseEntities ent = new RestDatabaseEntities();
         public MainWindow()
         {
             InitializeComponent();

@@ -21,11 +21,11 @@ namespace Pract_pr_22.RolePages
     public partial class RestPage : Page
     {
         private static User localUser;
-        private static Restourant localRest;
+        private static Restaurant localRest;
 
         private static List<string> imageList;
 
-        public RestPage(User user, Restourant restourant)
+        public RestPage(User user, Restaurant restourant)
         {
             InitializeComponent();
 
@@ -59,7 +59,7 @@ namespace Pract_pr_22.RolePages
 
         private void PhoneBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show($"Контактный номер:\n{localRest.ContactPhone}");
+            MessageBox.Show($"Контактный номер:\n{localRest.Phone}");
         }
 
         private void AddBookinBtn_Click(object sender, RoutedEventArgs e)
