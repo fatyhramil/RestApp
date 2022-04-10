@@ -30,13 +30,13 @@
                                 <TextBox x:Name="AddressTb" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Address}" materialDesign:HintAssist.Hint="Адрес" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" Height="50" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
                                 <TextBox x:Name="MestaTb" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Общее кол-во мест" Text="{Binding PlaceCount}" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" Height="50" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
                                 <StackPanel Orientation="Horizontal">
-                                    <ListView ItemsSource="{Binding Image1}">
+                                    <!--<ListView ItemsSource="{Binding Image1}">
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding Path}"/>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
-                                    </ListView>
+                                    </ListView>-->
                                     <TextBox x:Name="RestImages" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Изображения" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" Height="50" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
                                     <Button x:Name="AddImageButton" Style="{StaticResource MaterialDesignRaisedButton}" Height="55" VerticalAlignment="Bottom" BorderBrush="#5596ff" Background="#5596ff" Width="55"  Margin="5,0,0,0" ToolTip="MaterialDesignRaisedButton" Click="Button_Click">
                                         <materialDesign:PackIcon Kind="Image" Height="25" Width="25" VerticalAlignment="Center">

@@ -12,11 +12,11 @@
     <StackPanel>
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="ExitBtn" Click="ExitBtn_Click" Margin="0,20,0,0" BorderBrush="#FF0000" Foreground="#FF0000" Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" ToolTip="Resource name: MaterialDesignPaperLightButton" Content="ВЫЙТИ" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand" />
+                <Button x:Name="ExitBtn" Click="ExitBtn_Click" Margin="0,20,0,0" BorderBrush="#FF0000" Foreground="#FF0000" Width="100" Style="{StaticResource MaterialDesignPaperLightButton}" ToolTip="Resource name: MaterialDesignPaperLightButton" Content="ВЫЙТИ" Cursor="Hand" />
                 <Button Margin="30,20,50,0" Height="60" Width="60" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" BorderBrush="#4BB9F8" Background="#4BB9F8" Foreground="White" x:Name="MyAccBtn" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Cursor="Hand"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Button FontSize="30" x:Name="BackBtn" Click="BackBtn_Click" BorderBrush="White" Foreground="#4BB9F8" Background="White" Content="&lt;" Style="{StaticResource MaterialDesignOutlinedButton}" ToolTip="MaterialDesignOutlinedButton" Width="50" Height="50" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
+                <Button FontSize="30" x:Name="BackBtn" Click="BackBtn_Click" BorderBrush="White" Foreground="#4BB9F8" Background="White" Content="&lt;" Style="{StaticResource MaterialDesignOutlinedButton}" ToolTip="MaterialDesignOutlinedButton" Width="50" Height="50"/>
                 <TextBlock Margin="10,0,0,0" FontWeight="Bold" HorizontalAlignment="Center" Text="Мои бронирования" FontSize="40"  Foreground="Black"/>
             </StackPanel>
         </StackPanel>
@@ -39,7 +39,7 @@
                                             <TextBlock Text="{Binding Restaurant.Name}"/>
                                             <TextBlock Text="{Binding Restaurant.Address}"/>
                                         </StackPanel>
-                                        <Button HorizontalAlignment="Right" Margin="20,10,0,10" Content="{materialDesign:PackIcon Kind=ClockOutline}" x:Name="PhoneBtn" Click="PhoneBtn_Click" BorderBrush="#4BB9F8" BorderThickness="2" Foreground="#4BB9F8" Background="White" Style="{StaticResource MaterialDesignOutlinedButton}" ToolTip="MaterialDesignOutlinedButton" Width="25" Height="25" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
+                                        <Button HorizontalAlignment="Right" Margin="20,10,0,10" Content="{materialDesign:PackIcon Kind=ClockOutline}" x:Name="PhoneBtn" Click="PhoneBtn_Click" BorderBrush="#4BB9F8" BorderThickness="2" Foreground="#4BB9F8" Background="White" Style="{StaticResource MaterialDesignOutlinedButton}" ToolTip="MaterialDesignOutlinedButton" Width="25" Height="25"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical">
                                         <StackPanel Orientation="Horizontal">
@@ -59,7 +59,7 @@
                                 </StackPanel>
                             </materialDesign:Card>
 
-                            <Button x:Name="DeleteBtn" Click="DeleteBtn_Click" Grid.Column="1" Content="{materialDesign:PackIcon Kind=CloseThick}" Foreground="White" BorderBrush="#4BB9F8" Background="#4BB9F8" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="MaterialDesignFloatingActionMiniLightButton" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
+                            <Button x:Name="DeleteBtn" Click="DeleteBtn_Click" Grid.Column="1" Content="{materialDesign:PackIcon Kind=CloseThick}" Foreground="White" BorderBrush="#4BB9F8" Background="#4BB9F8" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" ToolTip="MaterialDesignFloatingActionMiniLightButton"/>
                         
                         </Grid>
                     </DataTemplate>

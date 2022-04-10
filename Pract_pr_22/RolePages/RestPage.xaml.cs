@@ -24,6 +24,7 @@ namespace Pract_pr_22.RolePages
         private static Restaurant localRest;
 
         private static List<string> imageList;
+        private List<Image> imageList2;
 
         public RestPage(User user, Restaurant restourant)
         {
@@ -33,28 +34,37 @@ namespace Pract_pr_22.RolePages
 
             localUser = user;
             localRest = restourant;
-            if(localRest.Image != null)
+            imageList2 = MainWindow.ent.Image.Where(x=>x.RestaurantID==localRest.ID).ToList();
+            //if(localRest.Image != null)
+            //{
+            //    imageList = localRest.Image.Split(',').ToList();
+            //    if (imageList.Count == 1)
+            //    {
+            //        BitmapImage myBitmapImage = new BitmapImage(new Uri($"../../../..{imageList[0]}", UriKind.Relative));
+            //        myBitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+
+            //        ImageFirst.Source = myBitmapImage;
+            //    }
+            //    else if (imageList.Count == 2)
+            //    {
+            //        BitmapImage myBitmapImageF = new BitmapImage(new Uri($"../../../..{imageList[0]}", UriKind.Relative));
+            //        BitmapImage myBitmapImageS = new BitmapImage(new Uri($"../../../..{imageList[1]}", UriKind.Relative));
+            //        myBitmapImageF.CacheOption = BitmapCacheOption.OnLoad;
+            //        myBitmapImageS.CacheOption = BitmapCacheOption.OnLoad;
+
+            //        ImageFirst.Source = myBitmapImageF;
+            //        ImageSecond.Source = myBitmapImageS;
+            //    }
+            //}
+            if (imageList2 != null)
             {
-                imageList = localRest.Image.Split(',').ToList();
-                if (imageList.Count == 1)
+                if (imageList2.Count > 0)
                 {
-                    BitmapImage myBitmapImage = new BitmapImage(new Uri($"../../../..{imageList[0]}", UriKind.Relative));
-                    myBitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-
-                    ImageFirst.Source = myBitmapImage;
-                }
-                else if (imageList.Count == 2)
-                {
-                    BitmapImage myBitmapImageF = new BitmapImage(new Uri($"../../../..{imageList[0]}", UriKind.Relative));
-                    BitmapImage myBitmapImageS = new BitmapImage(new Uri($"../../../..{imageList[1]}", UriKind.Relative));
+                    BitmapImage myBitmapImageF = new BitmapImage(new Uri($"../../../..{imageList2[0].Path}", UriKind.Relative));
                     myBitmapImageF.CacheOption = BitmapCacheOption.OnLoad;
-                    myBitmapImageS.CacheOption = BitmapCacheOption.OnLoad;
-
                     ImageFirst.Source = myBitmapImageF;
-                    ImageSecond.Source = myBitmapImageS;
                 }
             }
-            
 
              
 

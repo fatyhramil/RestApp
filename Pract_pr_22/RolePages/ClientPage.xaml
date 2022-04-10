@@ -10,6 +10,7 @@
       Title="ClientPage">
     <Page.Resources>
         <classes:NumberToForegroundConverter x:Key="NumberToForegroundConverterKey"/>
+        <classes:NumberToForegroundConverter2 x:Key="NumberToForegroundConverter2Key"/>
     </Page.Resources>
 
     <StackPanel>
@@ -22,7 +23,7 @@
                         <Image HorizontalAlignment="Center" Height="30" Width="30" Source="/Images/refresh.png"/>
                     </Button.Content>
                 </Button>
-                <TextBox BorderBrush="Gray" Margin="60,10,10,10" Foreground="Black" TextChanged="SearchTb_TextChanged" materialDesign:HintAssist.Foreground="Gray" x:Name="SearchTb" Width="350" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" Cursor="Arrow">
+                <TextBox BorderBrush="Gray" Margin="60,10,10,10" Foreground="Black" TextChanged="SearchTb_TextChanged" materialDesign:HintAssist.Foreground="Gray" x:Name="SearchTb" Width="350" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" Cursor="Arrow">
                     <materialDesign:HintAssist.Hint>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock VerticalAlignment="Center" Text="Название, кухня, блюдо..."/>
@@ -34,7 +35,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label VerticalAlignment="Center" Content="{materialDesign:PackIcon Kind=AccountMultiple}"/>
-                <TextBox Foreground="Black" TextChanged="CountPeopleTb_TextChanged" materialDesign:HintAssist.Foreground="Gray" Margin="10" BorderBrush="Gray" x:Name="CountPeopleTb" Width="200" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" materialDesign:HintAssist.Hint="Сколько вас?" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" Cursor="Arrow" />
+                <TextBox Foreground="Black" TextChanged="CountPeopleTb_TextChanged" materialDesign:HintAssist.Foreground="Gray" Margin="10" BorderBrush="Gray" x:Name="CountPeopleTb" Width="200" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" materialDesign:HintAssist.Hint="Сколько вас?" Cursor="Arrow" />
                 <Button  Margin="10" x:Name="TimeBtn" Background="#4BB9F8" BorderBrush="#4BB9F8" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" HorizontalAlignment="Left" ToolTip="MaterialDesignFloatingActionMiniButton" Content="{materialDesign:PackIcon Kind=ClockOutline}"/>
                 <Border BorderBrush="#4BB9F8" Width="120" Background="#4BB9F8" CornerRadius="15" Height="30" Margin="55,5,5,5">
                     <StackPanel VerticalAlignment="Center">
@@ -86,7 +87,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon x:Name="Ruble1" Foreground="#007CC2"  Kind="CurrencyRub" Height="16" Width="16"/>
                                     <materialDesign:PackIcon x:Name="Ruble2" Foreground="{Binding AveragePrice, Converter={StaticResource NumberToForegroundConverterKey}}" Kind="CurrencyRub" Height="16" Width="16"/>
-                                    <materialDesign:PackIcon x:Name="Ruble3" Foreground="{Binding AveragePrice, Converter={StaticResource NumberToForegroundConverterKey}}" Kind="CurrencyRub" Height="16" Width="16"/>
+                                    <materialDesign:PackIcon x:Name="Ruble3" Foreground="{Binding AveragePrice, Converter={StaticResource NumberToForegroundConverter2Key}}" Kind="CurrencyRub" Height="16" Width="16"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

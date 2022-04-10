@@ -24,6 +24,7 @@ namespace Pract_pr_22.RolePages
     {
         Ownership localOwnership;
         Restaurant restaurant;
+        string imagesNames;
         public AddEditRestPage(Ownership ownership, bool IsEdit)
         {
             InitializeComponent();
@@ -46,6 +47,16 @@ namespace Pract_pr_22.RolePages
             KitchenCB.ItemsSource = MainWindow.ent.KitchenType.ToList();
             KitchenTypeList.ItemsSource = MainWindow.ent.KitchenType.ToList();
             DataContext = restaurant;
+
+            foreach(Image image in restaurant.Image1)
+            {
+                if (image.Path != null && image.Path != "")
+                {
+                    imagesNames+=image.Path;
+                    imagesNames += "; ";
+                }
+            }
+            RestImages.Text = imagesNames;
             CheckValidation();
         }
         private void RadioButton_Click(object sender, RoutedEventArgs e)
