@@ -17,7 +17,7 @@
         
         <StackPanel Grid.Row="0" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button materialDesign:ShadowAssist.ShadowEdges="None"  x:Name="ExitBtn" Click="ExitBtn_Click" Margin="0,20,20,0" BorderBrush="#FF0000" Foreground="#FF0000" Width="120" Style="{StaticResource MaterialDesignPaperLightButton}" ToolTip="Resource name: MaterialDesignPaperLightButton" Content="ВЫЙТИ" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand" />
+                <Button materialDesign:ShadowAssist.ShadowEdges="None"  x:Name="ExitBtn" Click="ExitBtn_Click" Margin="0,20,20,0" BorderBrush="#FF0000" Foreground="#FF0000" Width="120" Style="{StaticResource MaterialDesignPaperLightButton}" ToolTip="Resource name: MaterialDesignPaperLightButton" Content="ВЫЙТИ" Cursor="Hand" />
             </StackPanel>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <TextBlock Margin="10,0,0,0" FontWeight="Bold" x:Name="WelcomTb" HorizontalAlignment="Center" Text="Здравствуйте, " FontSize="40"  Foreground="Black"/>
@@ -25,7 +25,7 @@
             </StackPanel>
         </StackPanel>
 
-        <Button Grid.Row="0" materialDesign:ShadowAssist.ShadowEdges="None" HorizontalAlignment="Right" x:Name="AddBtn" Click="AddBtn_Click" Margin="0,100,20,0" BorderBrush="#4BB9F8" Foreground="#4BB9F8" Width="120" Style="{StaticResource MaterialDesignPaperLightButton}" ToolTip="Resource name: MaterialDesignPaperLightButton" Content="ДОБАВИТЬ" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand" />
+        <Button Grid.Row="0" materialDesign:ShadowAssist.ShadowEdges="None" HorizontalAlignment="Right" x:Name="AddBtn" Click="AddBtn_Click" Margin="0,100,20,0" BorderBrush="#4BB9F8" Foreground="#4BB9F8" Width="120" Style="{StaticResource MaterialDesignPaperLightButton}" ToolTip="Resource name: MaterialDesignPaperLightButton" Content="ДОБАВИТЬ" Cursor="Hand" />
 
         <StackPanel Grid.Row="1">
             <DataGrid VerticalScrollBarVisibility="Visible" IsReadOnly="True" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeColumns="False" x:Name="MyRestGrid" CanUserAddRows="False" AutoGenerateColumns="False" HeadersVisibility="All">
@@ -60,8 +60,8 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button x:Name="EditBtn" Click="EditBtn_Click" materialDesign:ShadowAssist.ShadowEdges="None" Background="White" Foreground="#4BB9F8" Width="150" BorderBrush="#4BB9F8" Style="{StaticResource MaterialDesignPaperLightButton}" ToolTip="Resource name: MaterialDesignPaperLightButton" Content="РЕДАКТИРОВАТЬ" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
-                                    <Button x:Name="DeleteBtn" Click="DeleteBtn_Click" materialDesign:ShadowAssist.ShadowEdges="None" Background="White" Foreground="#FF0000" Margin="10,0,0,0" Width="100" BorderBrush="#FF0000" Style="{StaticResource MaterialDesignPaperLightButton}" ToolTip="Resource name: MaterialDesignPaperLightButton" Content="УДАЛИТЬ" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                                    <Button x:Name="EditBtn" Click="EditBtn_Click" materialDesign:ShadowAssist.ShadowEdges="None" Background="White" Foreground="#4BB9F8" Width="150" BorderBrush="#4BB9F8" Style="{StaticResource MaterialDesignPaperLightButton}" ToolTip="Resource name: MaterialDesignPaperLightButton" Content="РЕДАКТИРОВАТЬ" />
+                                    <Button x:Name="DeleteBtn" Click="DeleteBtn_Click" materialDesign:ShadowAssist.ShadowEdges="None" Background="White" Foreground="#FF0000" Margin="10,0,0,0" Width="100" BorderBrush="#FF0000" Style="{StaticResource MaterialDesignPaperLightButton}" ToolTip="Resource name: MaterialDesignPaperLightButton" Content="УДАЛИТЬ"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

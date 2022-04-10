@@ -4,286 +4,95 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      
       xmlns:local="clr-namespace:Pract_pr_22.RolePages"
-      d:DesignHeight="550" d:DesignWidth="800"
+      d:DesignHeight="550" d:DesignWidth="800" Background="#ffffff"
       mc:Ignorable="d" 
     
       Title="AddEditRestPage">
 
+
     <Grid>
-        <StackPanel Margin="10,0,0,0" Orientation="Vertical">
-            <StackPanel>
-                <TextBox VerticalAlignment="Top"
-                 Margin="10" 
-                 Text="Заполните данные о ресторане" 
-                 Width="225" HorizontalAlignment="Left" 
-                 TextWrapping="Wrap" 
-                 FontSize="24"
-                 BorderThickness="0" 
-                 FontStretch="Medium" 
-                 FontWeight="Bold"/>
-                <TextBox
-                VerticalAlignment="Top"
-                AcceptsReturn="True"
-                TextWrapping="NoWrap"
-                BorderThickness="0"
-                FontSize="12"
-                Width="300"
-                Height="25"
-                FontFamily="Roboto"
-                HorizontalAlignment="Left"
-                Foreground="Gray"
-                Text="Пользователи сделают выбор на основе этих данных"
-                IsReadOnly="True" Cursor="Arrow"/>
+        <StackPanel Margin="10,0,0,0" Orientation="Vertical" >
+            <StackPanel Width="500">
+                <TextBox VerticalAlignment="Top" Margin="10"  Text="Заполните данные о ресторане"  Width="225" HorizontalAlignment="Left"  TextWrapping="Wrap"  FontSize="24" BorderThickness="0"  FontStretch="Medium"  FontWeight="Bold"/>
+                <TextBox VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="NoWrap" BorderThickness="0" FontSize="12" Width="300" Height="25" FontFamily="Roboto" HorizontalAlignment="Left" Foreground="Gray" Text="Пользователи сделают выбор на основе этих данных" IsReadOnly="True" Cursor="Arrow"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" >
+            <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical">
                     <ScrollViewer Height="400" VerticalScrollBarVisibility="Hidden">
                         <StackPanel>
                             <StackPanel Orientation="Vertical">
-                                <TextBox
-                x:Name="NameTb"
-                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                materialDesign:HintAssist.Hint="Название"
-                Text="{Binding Name}"
-                VerticalAlignment="Top"
-                AcceptsReturn="True"
-                TextWrapping="Wrap"
-                Height="50" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
-                                <TextBox
-                x:Name="AboutTb"
-                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                Text="{Binding Description}"
-                Foreground="Gray"
-                VerticalAlignment="Top"
-                AcceptsReturn="True"
-                TextWrapping="Wrap"
-                Height="150" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
-                                <TextBox
-                x:Name="AddressTb"
-                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                Text="{Binding Address}"
-                materialDesign:HintAssist.Hint="Адрес"
-                VerticalAlignment="Top"
-                AcceptsReturn="True"
-                TextWrapping="Wrap"
-                Height="50" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
-                                <TextBox
-                x:Name="MestaTb"
-                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                materialDesign:HintAssist.Hint="Общее кол-во мест"
-                Text="{Binding PlaceCount}"
-                VerticalAlignment="Top"
-                AcceptsReturn="True"
-                TextWrapping="Wrap"
-                Height="50" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox
-                x:Name="RestImages"
-                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                materialDesign:HintAssist.Hint="Изображения"
-                VerticalAlignment="Top"
-                AcceptsReturn="True"
-                TextWrapping="Wrap"
-                Height="50" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
-                                    <Button
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    Height="55"
-                    VerticalAlignment="Bottom"
-                    BorderBrush="#5596ff"
-                    Background="#5596ff"
-                    Width="55" 
-                    Margin="5,0,0,0"
-                    ToolTip="MaterialDesignRaisedButton"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
-                                        <materialDesign:PackIcon
-                        Kind="Image"
-                        Height="25"
-                        Width="25" VerticalAlignment="Center"
-                        >
+                                    <TextBlock Text="·" x:Name="NameCheck" FontSize="60" VerticalAlignment="Top" Margin="0,0,10,0"/>
+                                    <TextBox x:Name="NameTb" PreviewTextInput="NameTb_PreviewTextInput" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Name}" materialDesign:HintAssist.Hint="Название" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" Height="50" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0"/>
+                                </StackPanel>
+                                <TextBox x:Name="AboutTb" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:ValidationAssist.UsePopup="True" ToolTip="Это описание увидят пользователи, расскажите о своем месте" materialDesign:HintAssist.Hint="Описание" Text="{Binding Description}" Foreground="Gray" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" Height="150" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
+                                <TextBox x:Name="AddressTb" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Address}" materialDesign:HintAssist.Hint="Адрес" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" Height="50" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
+                                <TextBox x:Name="MestaTb" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Общее кол-во мест" Text="{Binding PlaceCount}" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" Height="50" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
+                                <StackPanel Orientation="Horizontal">
+                                    <ListView ItemsSource="{Binding Image1}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Path}"/>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                    <TextBox x:Name="RestImages" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Изображения" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" Height="50" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
+                                    <Button x:Name="AddImageButton" Style="{StaticResource MaterialDesignRaisedButton}" Height="55" VerticalAlignment="Bottom" BorderBrush="#5596ff" Background="#5596ff" Width="55"  Margin="5,0,0,0" ToolTip="MaterialDesignRaisedButton" Click="Button_Click">
+                                        <materialDesign:PackIcon Kind="Image" Height="25" Width="25" VerticalAlignment="Center">
                                         </materialDesign:PackIcon>
                                     </Button>
                                 </StackPanel>
-                                <TextBox
-                x:Name="PhoneTb"
-                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                materialDesign:HintAssist.Hint="Контактный номер"
-                Text="{Binding Phone}"
-                VerticalAlignment="Top"
-                AcceptsReturn="True"
-                TextWrapping="Wrap"
-                Height="50" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
+                                <TextBox x:Name="PhoneTb" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Контактный номер" Text="{Binding Phone}" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" Height="50" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
                                 <StackPanel>
-                                    <TextBox
-                    VerticalAlignment="Top"
-                    AcceptsReturn="True"
-                    TextWrapping="NoWrap"
-                    BorderThickness="0"
-                    FontSize="14"
-                    Foreground="Black"
-                    Width="300"
-                    Height="25"
-                    FontFamily="Roboto"
-                    HorizontalAlignment="Left"
-                    Margin="5"
-                    Text="Наличие террасы?"
-                IsReadOnly="True" Cursor="Arrow"/>
+                                    <TextBox VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="NoWrap" BorderThickness="0" FontSize="14" Foreground="Black" Width="300" Height="25" FontFamily="Roboto" HorizontalAlignment="Left" Margin="5" Text="Наличие террасы?" IsReadOnly="True" Cursor="Arrow"/>
                                     <StackPanel Orientation="Horizontal">
-                                        <RadioButton x:Name="YesRb" IsChecked="{Binding HasTerrace}" Content="Да" Margin="0,0,30,0" Click="YesRb_Click"/>
-                                        <RadioButton x:Name="NoRb" IsChecked="{Binding HasTerrace}" Content="Нет" Click="NoRb_Click"/>
+                                        <CheckBox IsChecked="{Binding HasTerrace}"/>
+                                        <!--<RadioButton x:Name="YesRb" IsChecked="{Binding HasTerrace}" Content="Да" Margin="0,0,30,0" Click="YesRb_Click"/>
+                                        <RadioButton x:Name="NoRb" IsChecked="{Binding HasTerrace, Converter={StaticResource BoolInverterConverter}}" Content="Нет" Click="NoRb_Click"/>-->
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical">
-                                        <TextBox
-                    VerticalAlignment="Top"
-                    AcceptsReturn="True"
-                    TextWrapping="NoWrap"
-                    BorderThickness="0"
-                    FontSize="14"
-                    Foreground="Black"
-                    Width="300"
-                    Height="25"
-                    FontFamily="Roboto"
-                    HorizontalAlignment="Left"
-                    Margin="5"
-                    Text="Режим работы"
-                IsReadOnly="True" Cursor="Arrow"/>
+                                        <TextBox VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="NoWrap" BorderThickness="0" FontSize="14" Foreground="Black" Width="300" Height="25" FontFamily="Roboto" HorizontalAlignment="Left" Margin="5" Text="Режим работы" IsReadOnly="True" Cursor="Arrow"/>
                                         <StackPanel Orientation="Horizontal">
                                             <StackPanel Orientation="Horizontal" Margin="0,5">
-
-                                                <Button
-                                Margin="8 0 0 0"
-                                Background="#5596ff"
-                                BorderBrush="#5596ff"
-                                Content="От"
-                                >
-                                                    <Button.CommandParameter>
-                                                        <Grid Margin="-1">
-                                                            <Grid.RowDefinitions>
-                                                                <RowDefinition
-                                            Height="Auto" />
-                                                                <RowDefinition
-                                            Height="Auto" />
-                                                            </Grid.RowDefinitions>
-                                                            <materialDesign:Clock
-                                        DisplayAutomation="ToSeconds"
-                                        x:Name="ClockBefore" />
-                                                            <StackPanel
-                                         Grid.Row="1"
-                                         Margin="8"
-                                         HorizontalAlignment="Right"
-                                         Orientation="Horizontal">
-                                                                <Button
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                            CommandParameter="0"
-                                            Content="CANCEL" />
-                                                                <Button
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                            CommandParameter="1"
-                                            Content="OK" />
-                                                            </StackPanel>
-                                                        </Grid>
-                                                    </Button.CommandParameter>
-                                                </Button>
-                                                <TextBlock
-                            Text="{Binding StartTime, StringFormat=t}"
-                            VerticalAlignment="Center"
-                            FontSize="24" />
+                                                <materialDesign:TimePicker x:Name="StartTimePicker" Is24Hours="True" Width="100" Text="{Binding StartTime}" />
                                             </StackPanel>
+                                            <TextBlock Text="-" FontSize="24"/>
                                             <StackPanel Orientation="Horizontal" Margin="0,5">
-                                                <Button
-                                Margin="8 0 0 0"
-                                Background="#5596ff"
-                                BorderBrush="#5596ff"
-                                Content="До">
-                                                    <Button.CommandParameter>
-                                                        <Grid Margin="-1">
-                                                            <Grid.RowDefinitions>
-                                                                <RowDefinition
-                                            Height="Auto" />
-                                                                <RowDefinition
-                                            Height="Auto" />
-                                                            </Grid.RowDefinitions>
-                                                            <materialDesign:Clock
-                                        DisplayAutomation="ToSeconds"
-                                        x:Name="ClockAfter" />
-                                                            <StackPanel
-                                         Grid.Row="1"
-                                         Margin="8"
-                                         HorizontalAlignment="Right"
-                                         Orientation="Horizontal">
-                                                                <Button
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                            CommandParameter="0"
-                                            Content="CANCEL" />
-                                                                <Button
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                            CommandParameter="1"
-                                            Content="OK" />
-                                                            </StackPanel>
-                                                        </Grid>
-                                                    </Button.CommandParameter>
-                                                </Button>
-                                                <TextBlock
-                            Text="{Binding EndTime, StringFormat=t}"
-                            VerticalAlignment="Center"
-                            FontSize="24" />
+                                                <materialDesign:TimePicker x:Name="EndTimePicker" Is24Hours="True" Width="100" Text="{Binding EndTime}" />
                                             </StackPanel>
                                         </StackPanel>
                                     </StackPanel>
-                                    <ComboBox
-                    materialDesign:HintAssist.Hint="Кухня"
-                    Width="150"
-                    HorizontalAlignment="Left"
-                    Margin="10">
+                                    <ComboBox x:Name="KitchenCB" DisplayMemberPath="Name" SelectedItem="{Binding KitchenType}" materialDesign:HintAssist.Hint="Кухня" Width="150" HorizontalAlignment="Left" Margin="10">
                                     </ComboBox>
-                                    <TextBox
-                    x:Name="OtherTb"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                    Text="Альтернативные названия ресторана, сокращения, названия блюд по которым вас смогут найти"
-                    Foreground="Gray"
-                    VerticalAlignment="Top"
-                    AcceptsReturn="True"
-                    TextWrapping="Wrap"
-                    Height="150" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
+                                    <StackPanel Orientation="Vertical">
+                                        <ListView x:Name="KitchenTypeList">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="2*"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" Text="{Binding Name}"/>
+                                                        <CheckBox Grid.Column="1"/>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
+                                    <TextBox x:Name="OtherTb" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="Альтернативные названия ресторана, сокращения, названия блюд по которым вас смогут найти" ToolTip="Рекомендуем добавить несколько тегов, это поможет продвижению и поиску ресторана" Foreground="Gray" VerticalAlignment="Top" AcceptsReturn="True" TextWrapping="Wrap" Height="150" Width="250" HorizontalAlignment="Left" Margin="0,20,0,0" />
                                 </StackPanel>
                                 <Label Content="Средний чек" FontSize="14" Foreground="Black"/>
-                                <materialDesign:RatingBar
-                x:Name="CustomRatingBar"
-                Max="3"
-                Value="2"
-                Background="#5596ff"
-                Foreground="#5596ff"
-                Orientation="Horizontal">
-                                    <materialDesign:RatingBar.ValueItemTemplate>
-                                        <DataTemplate
-                            DataType="system:Int32">
-                                            <Grid>
-                                                <materialDesign:PackIcon
-                                Kind="CurrencyRub"
-                                Height="24"
-                                Width="24" />
-                                            </Grid>
-                                        </DataTemplate>
-                                    </materialDesign:RatingBar.ValueItemTemplate>
-                                </materialDesign:RatingBar>
+                                <StackPanel Orientation="Horizontal">
+                                    <Slider x:Name="CustomRatingBar" Orientation="Horizontal" Width="200" Minimum="0" Maximum="2" Value="{Binding AveragePrice}" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="CustomRatingBar_ValueChanged"/>
+                                    <materialDesign:PackIcon x:Name="Ruble1" Foreground="#4BB9F8" Kind="CurrencyRub" Height="16" Width="16"/>
+                                    <materialDesign:PackIcon x:Name="Ruble2" Kind="CurrencyRub" Height="16" Width="16"/>
+                                    <materialDesign:PackIcon x:Name="Ruble3" Kind="CurrencyRub" Height="16" Width="16"/>
+                                </StackPanel>
                                 <StackPanel>
-                                    <Button
-                ToolTip="MaterialDesignOutlinedButton"
-                x:Name="AddRestBtn"
-                Content="Отправить"
-                BorderBrush="#5596ff"
-                Margin="0,10"
-                Width="250"
-                FontSize="12"
-                Background="#5596ff"
-                Foreground="White"
-                Height="25"
-                />
+                                    <Button ToolTip="MaterialDesignOutlinedButton" x:Name="AddRestBtn" Content="Отправить" BorderBrush="#5596ff" Margin="0,10" Width="250" FontSize="12" Background="#5596ff" Foreground="White" Height="25" Click="AddRestBtn_Click"/>
+                                    <Button ToolTip="MaterialDesignOutlinedButton" x:Name="BackButton" Content="Назад" BorderBrush="#5596ff" Margin="0,10" Width="250" FontSize="12" Background="#5596ff" Foreground="White" Height="25" Click="BackButton_Click"/>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
@@ -291,28 +100,9 @@
                 </StackPanel>
                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <Label Foreground="#4BB9F8" Content="&lt;" FontSize="60" FontWeight="Bold" Margin="0,0,0,10"/>
-                    <Label Foreground="#4BB9F8" Content="Регистрация" FontSize="30" FontWeight="Bold" VerticalAlignment="Center"/>
+                    <Label x:Name="PageNameTb" Foreground="#4BB9F8" FontSize="30" FontWeight="Bold" VerticalAlignment="Center"/>
                 </StackPanel>
-
-                <!--<StackPanel>
-                    <Button
-                ToolTip="MaterialDesignOutlinedButton"
-                x:Name="Otpravit"
-                Content="Добавить "
-                BorderBrush="#5596ff"
-                Margin="0,10"
-                Width="250"
-                FontSize="12"
-                Background="#5596ff"
-                Foreground="White"
-                
-                Height="25"
-                />
-                    
-                </StackPanel>-->
             </StackPanel>
         </StackPanel>
-
-
     </Grid>
 </Page>

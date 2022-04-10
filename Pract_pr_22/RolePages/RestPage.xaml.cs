@@ -33,26 +33,30 @@ namespace Pract_pr_22.RolePages
 
             localUser = user;
             localRest = restourant;
-
-            imageList = localRest.Image.Split(',').ToList();
-
-            if (imageList.Count == 1)
+            if(localRest.Image != null)
             {
-                BitmapImage myBitmapImage = new BitmapImage(new Uri($"../../../..{imageList[0]}", UriKind.Relative));
-                myBitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                imageList = localRest.Image.Split(',').ToList();
+                if (imageList.Count == 1)
+                {
+                    BitmapImage myBitmapImage = new BitmapImage(new Uri($"../../../..{imageList[0]}", UriKind.Relative));
+                    myBitmapImage.CacheOption = BitmapCacheOption.OnLoad;
 
-                ImageFirst.Source = myBitmapImage;
+                    ImageFirst.Source = myBitmapImage;
+                }
+                else if (imageList.Count == 2)
+                {
+                    BitmapImage myBitmapImageF = new BitmapImage(new Uri($"../../../..{imageList[0]}", UriKind.Relative));
+                    BitmapImage myBitmapImageS = new BitmapImage(new Uri($"../../../..{imageList[1]}", UriKind.Relative));
+                    myBitmapImageF.CacheOption = BitmapCacheOption.OnLoad;
+                    myBitmapImageS.CacheOption = BitmapCacheOption.OnLoad;
+
+                    ImageFirst.Source = myBitmapImageF;
+                    ImageSecond.Source = myBitmapImageS;
+                }
             }
-            else if (imageList.Count == 2)
-            {
-                BitmapImage myBitmapImageF = new BitmapImage(new Uri($"../../../..{imageList[0]}", UriKind.Relative));
-                BitmapImage myBitmapImageS = new BitmapImage(new Uri($"../../../..{imageList[1]}", UriKind.Relative));
-                myBitmapImageF.CacheOption = BitmapCacheOption.OnLoad;
-                myBitmapImageS.CacheOption = BitmapCacheOption.OnLoad;
+            
 
-                ImageFirst.Source = myBitmapImageF;
-                ImageSecond.Source = myBitmapImageS;
-            }    
+             
 
             DataContext = restourant;
         }

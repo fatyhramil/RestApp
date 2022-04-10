@@ -18,6 +18,7 @@ namespace Pract_pr_22
         public Restaurant()
         {
             this.Booking = new HashSet<Booking>();
+            this.Image1 = new HashSet<Image>();
             this.Ownership = new HashSet<Ownership>();
             this.RestaurantKitchen = new HashSet<RestaurantKitchen>();
         }
@@ -38,6 +39,8 @@ namespace Pract_pr_22
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Booking { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Image1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ownership> Ownership { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

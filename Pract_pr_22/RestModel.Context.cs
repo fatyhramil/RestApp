@@ -13,10 +13,10 @@ namespace Pract_pr_22
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class RestDatabaseEntities : DbContext
+    public partial class RestDatabaseEntities1 : DbContext
     {
-        public RestDatabaseEntities()
-            : base("name=RestDatabaseEntities")
+        public RestDatabaseEntities1()
+            : base("name=RestDatabaseEntities1")
         {
         }
     
@@ -26,6 +26,7 @@ namespace Pract_pr_22
         }
     
         public virtual DbSet<Booking> Booking { get; set; }
+        public virtual DbSet<Image> Image { get; set; }
         public virtual DbSet<KitchenType> KitchenType { get; set; }
         public virtual DbSet<Ownership> Ownership { get; set; }
         public virtual DbSet<Restaurant> Restaurant { get; set; }

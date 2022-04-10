@@ -48,6 +48,10 @@ namespace Pract_pr_22.RegPages
                     NavigationService.Navigate(new CreatorPage(user));
                 }
             }
+            else
+            {
+                EnterBtn.Background = Brushes.Red;
+            }
         }
     }
 }

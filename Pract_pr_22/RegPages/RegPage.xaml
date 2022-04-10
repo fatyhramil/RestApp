@@ -20,7 +20,7 @@
                 <Label x:Name="NeedForLbl" Margin="10,0,0,0" Content="Это необходимо для " Foreground="Gray"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Left">
-                <TextBox BorderBrush="Gray" x:Name="PhoneTb" Foreground="Black" Margin="10" Width="350" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" materialDesign:HintAssist.Hint="Номер телефона" materialDesign:HintAssist.Foreground="Gray" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" Cursor="Arrow" >
+                <TextBox BorderBrush="Gray" x:Name="PhoneTb" Foreground="Black" Margin="10" Width="350" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" materialDesign:HintAssist.Hint="Номер телефона" materialDesign:HintAssist.Foreground="Gray" Cursor="Arrow" >
                     <TextBox.ToolTip>
                         <StackPanel>
                             <Label Content="Пример:"/>
@@ -28,8 +28,8 @@
                         </StackPanel>
                     </TextBox.ToolTip>
                 </TextBox>
-                <TextBox BorderBrush="Gray" x:Name="NameTb" Foreground="Black" Margin="10" Width="350" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" materialDesign:HintAssist.Hint="Имя" materialDesign:HintAssist.Foreground="Gray" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" Cursor="Arrow" />
-                <TextBox BorderBrush="Gray" x:Name="PasswordTb" Foreground="Black" Margin="10" Width="350" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" materialDesign:HintAssist.Hint="Пароль" materialDesign:HintAssist.Foreground="Gray" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" Cursor="Arrow" />
+                <TextBox BorderBrush="Gray" x:Name="NameTb" Foreground="Black" Margin="10" Width="350" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" materialDesign:HintAssist.Hint="Имя" materialDesign:HintAssist.Foreground="Gray" Cursor="Arrow" />
+                <TextBox BorderBrush="Gray" x:Name="PasswordTb" Foreground="Black" Margin="10" Width="350" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" materialDesign:HintAssist.Hint="Пароль" materialDesign:HintAssist.Foreground="Gray" Cursor="Arrow" />
                 <CheckBox Background="#4BB9F8" Margin="10" x:Name="CreatePassCb" Content="Сгенерировать пароль" Checked="CreatePassCb_Checked">
                     <CheckBox.Resources>
                         <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#4BB9F8"/>
@@ -43,7 +43,7 @@
                 </CheckBox>
             </StackPanel>
             <StackPanel>
-                <Button materialDesign:ShadowAssist.ShadowEdges="Bottom" x:Name="Enterbtn" BorderBrush="#4BB9F8" Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="200" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="ОТПРАВИТЬ" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Background="#4BB9F8" Click="Enterbtn_Click" Cursor="Hand"/>
+                <Button materialDesign:ShadowAssist.ShadowEdges="Bottom" x:Name="Enterbtn" BorderBrush="#4BB9F8" Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="200" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="ОТПРАВИТЬ" Background="#4BB9F8" Click="Enterbtn_Click" Cursor="Hand"/>
             </StackPanel>
         </StackPanel>
         <StackPanel VerticalAlignment="Center" Orientation="Horizontal">

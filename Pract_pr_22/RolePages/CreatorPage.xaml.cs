@@ -44,13 +44,13 @@ namespace Pract_pr_22.RolePages
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddEditRestPage(new Ownership()));
+            NavigationService.Navigate(new AddEditRestPage(null, false));
         }
 
         private void EditBtn_Click(object sender, RoutedEventArgs e)
         {
             Ownership ownership = MyRestGrid.SelectedItem as Ownership;
-            NavigationService.Navigate(new AddEditRestPage(ownership));
+            NavigationService.Navigate(new AddEditRestPage(ownership, true));
         }
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)

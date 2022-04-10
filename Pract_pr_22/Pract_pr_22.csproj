@@ -75,16 +75,20 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Booking.cs">
-      <DependentUpon>RestDBModel.tt</DependentUpon>
+      <DependentUpon>RestModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\NumberToForegroundConverter.cs" />
     <Compile Include="CustomMessageWindows\CustomMessageWindow.xaml.cs">
       <DependentUpon>CustomMessageWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Image.cs">
+      <DependentUpon>RestModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="KitchenType.cs">
-      <DependentUpon>RestDBModel.tt</DependentUpon>
+      <DependentUpon>RestModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Ownership.cs">
-      <DependentUpon>RestDBModel.tt</DependentUpon>
+      <DependentUpon>RestModel.tt</DependentUpon>
     </Compile>
     <Compile Include="RegPages\AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>
@@ -96,28 +100,28 @@
       <DependentUpon>RegPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Restaurant.cs">
-      <DependentUpon>RestDBModel.tt</DependentUpon>
+      <DependentUpon>RestModel.tt</DependentUpon>
     </Compile>
     <Compile Include="RestaurantKitchen.cs">
-      <DependentUpon>RestDBModel.tt</DependentUpon>
+      <DependentUpon>RestModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="RestDBModel.Context.cs">
+    <Compile Include="RestModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RestDBModel.Context.tt</DependentUpon>
+      <DependentUpon>RestModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="RestDBModel.cs">
+    <Compile Include="RestModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RestDBModel.tt</DependentUpon>
+      <DependentUpon>RestModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="RestDBModel.Designer.cs">
+    <Compile Include="RestModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RestDBModel.edmx</DependentUpon>
+      <DependentUpon>RestModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Role.cs">
-      <DependentUpon>RestDBModel.tt</DependentUpon>
+      <DependentUpon>RestModel.tt</DependentUpon>
     </Compile>
     <Compile Include="RolePages\AddBookingPage.xaml.cs">
       <DependentUpon>AddBookingPage.xaml</DependentUpon>
@@ -138,10 +142,10 @@
       <DependentUpon>RestPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>RestDBModel.tt</DependentUpon>
+      <DependentUpon>RestModel.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>RestDBModel.tt</DependentUpon>
+      <DependentUpon>RestModel.tt</DependentUpon>
     </Compile>
     <Page Include="CustomMessageWindows\CustomMessageWindow.xaml">
       <SubType>Designer</SubType>
@@ -219,12 +223,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <EntityDeploy Include="RestDBModel.edmx">
+    <EntityDeploy Include="RestModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RestDBModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>RestModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="RestDBModel.edmx.diagram">
-      <DependentUpon>RestDBModel.edmx</DependentUpon>
+    <None Include="RestModel.edmx.diagram">
+      <DependentUpon>RestModel.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -242,15 +246,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RestDBModel.Context.tt">
+    <Content Include="RestModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RestDBModel.edmx</DependentUpon>
-      <LastGenOutput>RestDBModel.Context.cs</LastGenOutput>
+      <DependentUpon>RestModel.edmx</DependentUpon>
+      <LastGenOutput>RestModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="RestDBModel.tt">
+    <Content Include="RestModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RestDBModel.edmx</DependentUpon>
-      <LastGenOutput>RestDBModel.cs</LastGenOutput>
+      <DependentUpon>RestModel.edmx</DependentUpon>
+      <LastGenOutput>RestModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

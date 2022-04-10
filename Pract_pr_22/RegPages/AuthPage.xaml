@@ -12,16 +12,14 @@
     <StackPanel VerticalAlignment="Center">
         <StackPanel Orientation="Horizontal">
             <TextBlock Margin="10" Text="Вход" Width="200" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <Button materialDesign:ShadowAssist.ShadowEdges="None" x:Name="RegBtn" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignOutlinedLightButton}" ToolTip="MaterialDesignOutlinedButton" Content="РЕГИСТРАЦИЯ" Width="150" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Foreground="#4BB9F8" BorderBrush="#4BB9F8" Cursor="Hand" Click="RegBtn_Click"/>
+            <Button materialDesign:ShadowAssist.ShadowEdges="None" x:Name="RegBtn" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignOutlinedLightButton}" ToolTip="MaterialDesignOutlinedButton" Content="РЕГИСТРАЦИЯ" Width="150" Foreground="#4BB9F8" BorderBrush="#4BB9F8" Cursor="Hand" Click="RegBtn_Click"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left">
-            <TextBox materialDesign:HintAssist.Foreground="Gray" Foreground="Black" BorderBrush="Gray" x:Name="PhoneTb" Margin="10" Width="350" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" materialDesign:HintAssist.Hint="Номер телефона" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxEnabledComboBox}" Cursor="Arrow" />
-            <PasswordBox materialDesign:HintAssist.Foreground="Gray" Foreground="Black" BorderBrush="Gray" x:Name="PasswordTb" Margin="10" Width="350" Style="{StaticResource MaterialDesignOutlinedPasswordBox}" VerticalAlignment="Top" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedPasswordBoxEnabledComboBox}" materialDesign:HintAssist.Hint="Пароль" Cursor="Arrow" >
-                
-            </PasswordBox>
+            <TextBox materialDesign:HintAssist.Foreground="Gray" Foreground="Black" BorderBrush="Gray" x:Name="PhoneTb" Margin="10" Width="350" Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" AcceptsReturn="True" materialDesign:HintAssist.Hint="Номер телефона" Cursor="Arrow" />
+            <PasswordBox materialDesign:HintAssist.Foreground="Gray" Foreground="Black" BorderBrush="Gray" x:Name="PasswordTb" Margin="10" Width="350" Style="{StaticResource MaterialDesignOutlinedPasswordBox}" VerticalAlignment="Top" materialDesign:HintAssist.Hint="Пароль" Cursor="Arrow" />
         </StackPanel>
         <StackPanel>
-            <Button materialDesign:ShadowAssist.ShadowEdges="Bottom" Margin="10" x:Name="EnterBtn" Click="EnterBtn_Click" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="200" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="ВОЙТИ" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Background="#FF25841A"/>
+            <Button materialDesign:ShadowAssist.ShadowEdges="Bottom" Margin="10" x:Name="EnterBtn" Click="EnterBtn_Click" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="200" ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" Content="ВОЙТИ" Background="#FF25841A"/>
         </StackPanel>
     </StackPanel>
 </Page>
