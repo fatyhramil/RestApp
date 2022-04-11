@@ -23,40 +23,42 @@ namespace Pract_pr_22.RolePages
     public partial class AddEditRestPage : Page
     {
         Ownership localOwnership;
-        Restaurant restaurant;
+        Restaurant localRestaurant;
         string imagesNames;
+        List<Image> images=new List<Image>() { };
         public AddEditRestPage(Ownership ownership, bool IsEdit)
         {
             InitializeComponent();
             localOwnership = ownership;
-
-            if (localOwnership != null)
+            if (IsEdit)
             {
-                restaurant = MainWindow.ent.Restaurant.Where(c => c.ID == localOwnership.RestaurantID).FirstOrDefault();
-                if (restaurant == null)
-                {
-                    PageNameTb.Content = "Добавление";
-                    IsEdit = false;
-                }
-                else
-                {
-                    PageNameTb.Content = "Управление";
-                    IsEdit = true;
-                }
+                PageNameTb.Content = "Управление";
+                localRestaurant = MainWindow.ent.Restaurant.Where(c => c.ID == localOwnership.RestaurantID).FirstOrDefault();
+            }
+            else
+            {
+                PageNameTb.Content = "Добавление";
+            }
+            if (localOwnership == null)
+            {
+                MessageBox.Show("null");
             }
             KitchenCB.ItemsSource = MainWindow.ent.KitchenType.ToList();
             KitchenTypeList.ItemsSource = MainWindow.ent.KitchenType.ToList();
-            DataContext = restaurant;
-
-            foreach(Image image in restaurant.Image1)
+            DataContext = localRestaurant;
+            if (localRestaurant != null)
             {
-                if (image.Path != null && image.Path != "")
+                foreach (Image image in localRestaurant.Image1)
                 {
-                    imagesNames+=image.Path;
-                    imagesNames += "; ";
+                    if (image.Path != null && image.Path != "")
+                    {
+                        imagesNames += image.Path;
+                        imagesNames += "; ";
+                    }
                 }
+                RestImages.Text = imagesNames;
             }
-            RestImages.Text = imagesNames;
+            
             CheckValidation();
         }
         private void RadioButton_Click(object sender, RoutedEventArgs e)
@@ -76,29 +78,76 @@ namespace Pract_pr_22.RolePages
 
         private void AddRestBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckPlaceCount() && NameTb.Text.Length > 0 && AboutTb.Text.Length > 0 && AddressTb.Text.Length > 0 && MestaTb.Text.Length > 0
-                //&& RestImages.Text.Length > 0 
-                && PhoneTb.Text.Length > 0)
+            try
             {
-                if (localOwnership == null)
+                if (CheckPlaceCount() && CheckTime()&& NameTb.Text.Length > 0 && AboutTb.Text.Length > 0&& AddressTb.Text.Length > 0 && MestaTb.Text.Length > 0 && RestImages.Text.Length > 0 && PhoneTb.Text.Length > 0&&HotWordsTB.Text.Length>0)
                 {
-                    Restaurant restaurant = new Restaurant()
+                    if (localOwnership == null)
                     {
-                        Name = NameTb.Text,
-                        Description = AboutTb.Text,
-                        Address = AddressTb.Text,
-                        PlaceCount = Convert.ToInt32(MestaTb.Text),
-                        Phone = PhoneTb.Text
-                    };
-                    MainWindow.ent.Restaurant.Add(restaurant);
+                        Restaurant restaurant = new Restaurant();
+                        restaurant.Name = NameTb.Text;
+                        restaurant.Description = AboutTb.Text;
+                        restaurant.Address = AddressTb.Text;
+                        restaurant.PlaceCount = Convert.ToInt32(MestaTb.Text);
+                        restaurant.Phone = PhoneTb.Text;
+                        restaurant.AveragePrice = CustomRatingBar.Value;
+                        restaurant.HasTerrace = TerraceCB.IsChecked;
+                        restaurant.StartTime = TimeSpan.Parse(StartTimePicker.Text);
+                        restaurant.EndTime = TimeSpan.Parse(EndTimePicker.Text);
+                        restaurant.Hotwords=HotWordsTB.Text;
+                        bool isFirstImage = true;
+                        foreach (Image image in images)
+                        {
+                            image.RestaurantID = restaurant.ID;
+                            if (image.RestaurantID != null || image.RestaurantID != 0)
+                            {
+                                restaurant.Image1.Add(image);
+                            }
+                            if (isFirstImage)
+                            {
+                                restaurant.Image = image.Path;
+                                isFirstImage = false;
+                            }
+                        }
+                        MainWindow.ent.Restaurant.Add(restaurant);
+                        localRestaurant = restaurant;
+                        Ownership ownership = new Ownership();
+                        ownership.User = CreatorPage.localUser;
+                        ownership.Restaurant = localRestaurant;
+                        MainWindow.ent.Ownership.Add(ownership);
+                    }
+                    MainWindow.ent.SaveChanges();
+                    MessageBox.Show("Данные сохранены");
+                    NavigationService.Navigate(new CreatorPage(CreatorPage.localUser));
                 }
-                MainWindow.ent.SaveChanges();
-                MessageBox.Show("Данные сохранены");
-                NavigationService.GoBack();
+                else
+                {
+                    MessageBox.Show("Вы ввели не все значения");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Вы ввели неправильные значения");
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private bool CheckTime()
+        {
+            try
+            {
+                if (TimeSpan.TryParse(StartTimePicker.Text, out TimeSpan startDate)&& TimeSpan.TryParse(EndTimePicker.Text, out TimeSpan endDate))
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Неправильно введено время начала или окончания работы ресторана");
+                    return false;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
             }
         }
         private bool CheckPlaceCount()
@@ -148,13 +197,12 @@ namespace Pract_pr_22.RolePages
         }
         private void CheckValidation()
         {
-            if (restaurant != null)
+            if (localRestaurant != null)
             {
-                if (restaurant.Name != "")
+                if (localRestaurant.Name != "")
                 {
                     NameCheck.Foreground = Brushes.Green;
                 }
-
             }
             else
             {
@@ -192,10 +240,16 @@ namespace Pract_pr_22.RolePages
                 string filePath = folderpath + System.IO.Path.GetFileName(op.FileName);
                 Image image = new Image();
                 //mainPath = mainPath.Replace(@"\"[0], '/');
-                image.Path = filePath;
-                image.RestaurantID = restaurant.ID;
-                restaurant.Image1.Add(image);
-                MainWindow.ent.SaveChanges();
+                
+                image.Path = System.IO.Path.GetFullPath(op.FileName);
+                images.Add(image);
+                imagesNames += image.Path + "; ";
+                RestImages.Text = imagesNames;
+                if (localOwnership != null)
+                {
+                    localRestaurant.Image1.Add(image);
+                }
+                //MainWindow.ent.SaveChanges();
                 //SetAttachedImages();
                 //CheckVisibility();
                 //product.MainImagePath = filePath.Substring(filePath.LastIndexOf("/Images"));

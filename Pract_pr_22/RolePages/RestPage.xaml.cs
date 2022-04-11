@@ -56,15 +56,15 @@ namespace Pract_pr_22.RolePages
             //        ImageSecond.Source = myBitmapImageS;
             //    }
             //}
-            if (imageList2 != null)
-            {
-                if (imageList2.Count > 0)
-                {
-                    BitmapImage myBitmapImageF = new BitmapImage(new Uri($"../../../..{imageList2[0].Path}", UriKind.Relative));
-                    myBitmapImageF.CacheOption = BitmapCacheOption.OnLoad;
-                    ImageFirst.Source = myBitmapImageF;
-                }
-            }
+            //if (imageList2 != null)
+            //{
+            //    if (imageList2.Count > 0)
+            //    {
+            //        BitmapImage myBitmapImageF = new BitmapImage(new Uri($"../../../..{imageList2[0].Path}", UriKind.Relative));
+            //        myBitmapImageF.CacheOption = BitmapCacheOption.OnLoad;
+            //        ImageFirst.Source = myBitmapImageF;
+            //    }
+            //}
 
              
 

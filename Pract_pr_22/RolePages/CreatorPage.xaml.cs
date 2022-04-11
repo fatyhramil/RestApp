@@ -22,7 +22,7 @@ namespace Pract_pr_22.RolePages
     /// </summary>
     public partial class CreatorPage : Page
     {
-        private static User localUser;
+        public static User localUser;
 
         public CreatorPage(User user)
         {
@@ -64,7 +64,9 @@ namespace Pract_pr_22.RolePages
 
                 if (MainWindow.ent.Booking.Where(c => c.RestaurantID == own.RestaurantID).ToList().Count == 0)
                 {
+                    Restaurant restaurant = MainWindow.ent.Restaurant.Where(c=>c.ID==own.RestaurantID).FirstOrDefault();
                     MainWindow.ent.Ownership.Remove(own);
+                    MainWindow.ent.Restaurant.Remove(restaurant);
                     MainWindow.ent.SaveChanges();
 
                     MyRestGrid.ItemsSource = MainWindow.ent.Ownership.Where(c => c.UserID == localUser.ID).ToList();

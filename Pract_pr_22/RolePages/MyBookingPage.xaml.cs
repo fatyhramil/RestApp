@@ -57,8 +57,7 @@ namespace Pract_pr_22.RolePages
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.DialogResult res = CustomMessageWindow.Show("Отменить бронирование?", "ОТМЕНИТЬ", "НАЗАД");
-            if (res == System.Windows.Forms.DialogResult.Yes)
+            if (MessageBox.Show("Отменить бронирование?", "ОТМЕНИТЬ", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 Button button = sender as Button;
                 Booking booking = button.DataContext as Booking;
@@ -68,6 +67,17 @@ namespace Pract_pr_22.RolePages
 
                 MyBookingList.ItemsSource = MainWindow.ent.Booking.Where(c => c.UserID == localUser.ID).ToList();
             }
+            //System.Windows.Forms.DialogResult res = CustomMessageWindow.Show("Отменить бронирование?", "ОТМЕНИТЬ", "НАЗАД");
+            //if (res == System.Windows.Forms.DialogResult.Yes)
+            //{
+            //    Button button = sender as Button;
+            //    Booking booking = button.DataContext as Booking;
+
+            //    MainWindow.ent.Booking.Remove(booking);
+            //    MainWindow.ent.SaveChanges();
+
+            //    MyBookingList.ItemsSource = MainWindow.ent.Booking.Where(c => c.UserID == localUser.ID).ToList();
+            //}
         }
     }
 }
