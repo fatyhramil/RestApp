@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,7 +26,10 @@ namespace Pract_pr_22.RolePages
         Ownership localOwnership;
         Restaurant localRestaurant;
         string imagesNames;
+        private static int counter;
         List<Image> images=new List<Image>() { };
+        readonly SolidColorBrush ok = new SolidColorBrush(Color.FromRgb(25, 169, 100));
+        readonly SolidColorBrush notOk = new SolidColorBrush(Color.FromRgb(128, 128, 128));
         public AddEditRestPage(Ownership ownership, bool IsEdit)
         {
             InitializeComponent();
@@ -41,10 +45,11 @@ namespace Pract_pr_22.RolePages
             }
             if (localOwnership == null)
             {
-                MessageBox.Show("null");
+                Abobus.Visibility = Visibility.Hidden;
+                Abobus.Height = 0;
             }
-            KitchenCB.ItemsSource = MainWindow.ent.KitchenType.ToList();
-            KitchenTypeList.ItemsSource = MainWindow.ent.KitchenType.ToList();
+            counter = 0;
+            KitchenList.ItemsSource = MainWindow.ent.KitchenType.ToList();
             DataContext = localRestaurant;
             if (localRestaurant != null)
             {
@@ -58,22 +63,6 @@ namespace Pract_pr_22.RolePages
                 }
                 RestImages.Text = imagesNames;
             }
-            
-            CheckValidation();
-        }
-        private void RadioButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void YesRb_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void NoRb_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void AddRestBtn_Click(object sender, RoutedEventArgs e)
@@ -182,43 +171,123 @@ namespace Pract_pr_22.RolePages
                 return false;
             }
         }
-
-
-        private bool IsButtonEnabled()
+        private bool SetChecks()
         {
-            if (NameTb.Text.Length > 0 && AboutTb.Text.Length > 0 && AddressTb.Text.Length > 0 && MestaTb.Text.Length > 0 && RestImages.Text.Length > 0 && PhoneTb.Text.Length > 0)
+            Check10.Foreground = ok;
+            if (!string.IsNullOrEmpty(NameTb.Text))
             {
-                return true;
+                Check1.Foreground = ok;
             }
             else
             {
+                Check1.Foreground = notOk;
                 return false;
             }
-        }
-        private void CheckValidation()
-        {
-            if (localRestaurant != null)
+
+            if (!string.IsNullOrEmpty(AboutTb.Text))
             {
-                if (localRestaurant.Name != "")
-                {
-                    NameCheck.Foreground = Brushes.Green;
-                }
+                Check2.Foreground = ok;
             }
             else
             {
-                NameCheck.Foreground = Brushes.Red;
+                Check2.Foreground = notOk;
+                return false;
             }
+
+            if (!string.IsNullOrEmpty(AddressTb.Text))
+            {
+                Check3.Foreground = ok;
+            }
+            else
+            {
+                Check3.Foreground = notOk;
+                return false;
+            }
+
+            int.TryParse(MestaTb.Text, out int count);
+
+            if (!string.IsNullOrEmpty(MestaTb.Text) && count > 0)
+            {
+                Check4.Foreground = ok;
+                Check4.Foreground = ok;
+            }
+            else
+            {
+                Check4.Foreground = notOk;
+                Check4.Foreground = notOk;
+
+                return false;
+            }
+            if (string.IsNullOrEmpty(RestImages.Text))
+            {
+                Check5.Foreground = notOk;
+            }
+            else
+            {
+                Check5.Foreground = ok;
+            }
+
+            if (!string.IsNullOrEmpty(PhoneTb.Text) 
+                //&& Regex.Match(PhoneTb.Text, @"^((\+7|7|8)+([0-9]){10})$").Success
+                )
+            {
+                Check6.Foreground = ok;
+                Check6.Foreground = ok;
+            }
+            else
+            {
+                Check6.Foreground = notOk;
+                Check6.Foreground = notOk;
+
+                return false;
+            }
+
+            if ((bool)TerraceCB.IsChecked)
+            {
+                Check7.Foreground = ok;
+                Check7.Foreground = ok;
+            }
+            else
+            {
+                Check7.Foreground = notOk;
+                Check7.Foreground = notOk;
+
+                return false;
+            }
+            if (!string.IsNullOrEmpty(StartTimePicker.Text) && !string.IsNullOrEmpty(EndTimePicker.Text))
+            {
+                Check8.Foreground = ok;
+            }
+            else
+            {
+                Check8.Foreground = notOk;
+
+            }
+
+            if (!string.IsNullOrEmpty(HotWordsTB.Text))
+            {
+                Check10.Foreground = ok;
+                Check10.Foreground = ok;
+            }
+            else
+            {
+                Check10.Foreground = notOk;
+                Check10.Foreground = notOk;
+
+                return false;
+            }
+            if (CustomRatingBar.Value>=0)
+            {
+                Check11.Foreground = ok;
+            }
+
+            return true;
         }
 
-        private void NameTb_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            CheckValidation();
-        }
-        private void Refresh()
-        {
-            KitchenCB.ItemsSource = MainWindow.ent.KitchenType.ToList();
-            KitchenTypeList.ItemsSource = MainWindow.ent.KitchenType.ToList();
 
+        private void Text_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            SetChecks();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -258,6 +327,7 @@ namespace Pract_pr_22.RolePages
 
         private void CustomRatingBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            SetChecks();
             var bc = new BrushConverter();
             if (CustomRatingBar.Value == 0)
             {
@@ -279,6 +349,78 @@ namespace Pract_pr_22.RolePages
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+        }
+        private void OpenListBtn_Click(object sender, RoutedEventArgs e)
+        {
+            counter++;
+
+            if (counter % 2 == 0)
+            {
+                KitchenList.Visibility = Visibility.Hidden;
+                KitchenList.Height = 0;
+            }
+            else
+            {
+                KitchenList.Visibility = Visibility.Visible;
+                KitchenList.Height = 100;
+            }
+        }
+
+
+        private void CurrentKitchenCb_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (localOwnership.Restaurant.ID != 0)
+            {
+                CheckBox cb = sender as CheckBox;
+
+                if (cb.DataContext is KitchenType type)
+                {
+                    RestaurantKitchen restournat_Kitchen = MainWindow.ent.RestaurantKitchen.ToList().Find(c => c.KitchenID == type.ID && c.RestaurantID == localOwnership.Restaurant.ID);
+
+                    if (restournat_Kitchen != null)
+                    {
+                        MainWindow.ent.RestaurantKitchen.Remove(restournat_Kitchen);
+                        MainWindow.ent.SaveChanges();
+                    }
+                }
+            }
+        }
+
+
+        private void CurrentKitchenCb_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (localOwnership!= null)
+                {
+                    CheckBox cb = sender as CheckBox;
+
+                    if (cb.DataContext is KitchenType type)
+                    {
+                        RestaurantKitchen restournat_Kitchen = MainWindow.ent.RestaurantKitchen.ToList().Find(c => c.KitchenID == type.ID && c.RestaurantID == localOwnership.Restaurant.ID);
+
+                        if (restournat_Kitchen == null)
+                        {
+                            RestaurantKitchen new_rest_Kitchen = new RestaurantKitchen
+                            {
+                                KitchenID = type.ID,
+                                RestaurantID = localOwnership.Restaurant.ID
+                            };
+
+                            MainWindow.ent.RestaurantKitchen.Add(new_rest_Kitchen);
+                            MainWindow.ent.SaveChanges();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            SetChecks();
         }
     }
 }
